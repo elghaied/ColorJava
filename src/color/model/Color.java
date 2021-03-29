@@ -19,6 +19,9 @@ public class Color {
         this.setRed(red);
         this.setGreen(green);
         this.setBlue(blue);
+
+        this.HexValue = "#"+ Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
+
     }
 
     /**
@@ -59,9 +62,10 @@ public class Color {
         String[] green = Arrays.copyOfRange(hexCode,3,5);
         String[] blue = Arrays.copyOfRange(hexCode,5,7) ;
 
-        hexToDecimal(red);
-        hexToDecimal(green);
-        hexToDecimal(blue);
+
+        setGreen(hexToDecimal(green));
+        setBlue(hexToDecimal(blue));
+        setRed(hexToDecimal(red));
 
         System.out.println(red);
         if(hexCode.length == 7){
@@ -112,7 +116,7 @@ public class Color {
                 ']';
     }
 
-    public void hexToDecimal(String[] hexPair){
+    public int hexToDecimal(String[] hexPair){
         String hashToNum = "";
         for (int i = 0; i < hexPair.length; i++) {
             System.out.println(hexPair[i]);
@@ -124,10 +128,12 @@ public class Color {
             conv = Integer.parseInt(hashToNum,16);
 
         } catch (IllegalArgumentException i){
-            throw new IllegalArgumentException("Hex code contains letters from A to F including numbers the error is on:" + hashToNum);
+            throw new IllegalArgumentException("Hex code contains letters from A to F, including numbers 0-9 " +
+                    " the error is on :" + hashToNum);
         }
 
         System.out.println(conv);
+        return  conv;
 
     }
 }
