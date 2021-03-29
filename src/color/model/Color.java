@@ -55,11 +55,15 @@ public class Color {
         System.out.println(Arrays.toString(hexCode));
         String hashtag = hexCode[0];
         System.out.println(hashtag);
-        String red = Arrays.toString(Arrays.copyOfRange(hexCode,1,3)) ;
-        String green = Arrays.toString( Arrays.copyOfRange(hexCode,3,5));
-        String blue = Arrays.toString(Arrays.copyOfRange(hexCode,5,7)) ;
+        String[] red = Arrays.copyOfRange(hexCode,1,3) ;
+        String[] green = Arrays.copyOfRange(hexCode,3,5);
+        String[] blue = Arrays.copyOfRange(hexCode,5,7) ;
 
-        System.out.println(red + green + blue);
+        hexToDecimal(red);
+        hexToDecimal(green);
+        hexToDecimal(blue);
+
+        System.out.println(red);
         if(hexCode.length == 7){
             if (hashtag == "#") {
                 throw new IllegalArgumentException("The hex Code must start with a hashtag #");
@@ -106,5 +110,24 @@ public class Color {
                 ", g=" + green +
                 ", b=" + blue +
                 ']';
+    }
+
+    public void hexToDecimal(String[] hexPair){
+        String hashToNum = "";
+        for (int i = 0; i < hexPair.length; i++) {
+            System.out.println(hexPair[i]);
+            hashToNum = hashToNum + hexPair[i] ;
+            System.out.println("hashToNum value : " + hashToNum);
+        }
+        int conv;
+        try {
+            conv = Integer.parseInt(hashToNum,16);
+
+        } catch (IllegalArgumentException i){
+            throw new IllegalArgumentException("Hex code contains letters from A to F including numbers the error is on:" + hashToNum);
+        }
+
+        System.out.println(conv);
+
     }
 }
