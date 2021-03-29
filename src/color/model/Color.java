@@ -1,6 +1,7 @@
 package color.model;
 
 import java.util.Arrays;
+import java.util.Properties;
 
 public class Color {
     int red;
@@ -10,11 +11,11 @@ public class Color {
 
 
 
-    public Color(String hexValue) throws IllegalArgumentException {
+    public Color(String hexValue) {
         this.setHexValue(hexValue);
     }
 
-    public Color(int red, int green, int blue) throws IllegalArgumentException {
+    public Color(int red, int green, int blue) {
         this.setRed(red);
         this.setGreen(green);
         this.setBlue(blue);
@@ -36,7 +37,7 @@ public class Color {
         if(green >= 0 && green <= 255){
             this.green = green;
         }else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Put a value between 0 and 255, you have assigned for green :" + green);
         }
     }
 
@@ -44,18 +45,27 @@ public class Color {
         if(blue >= 0 && blue <= 255){
             this.blue = blue;
         }else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Put a value between 0 and 255, you have assigned for blue :" + blue);
         }
     }
 
     public void setHexValue(String hexValue) {
         String[] hexCode = hexValue.split("");
         System.out.println(hexCode.length);
-        System.out.println(hexCode);
+        System.out.println(Arrays.toString(hexCode));
         String hashtag = hexCode[0];
-        String[] red = Arrays.copyOfRange(hexCode,1,3);
-        String[] green = Arrays.copyOfRange(hexCode,3,5);
-        String[] blue = Arrays.copyOfRange(hexCode,5,7);
+        System.out.println(hashtag);
+        String red = Arrays.toString(Arrays.copyOfRange(hexCode,1,3)) ;
+        String green = Arrays.toString( Arrays.copyOfRange(hexCode,3,5));
+        String blue = Arrays.toString(Arrays.copyOfRange(hexCode,5,7)) ;
+
+        System.out.println(red + green + blue);
+        if(hexCode.length == 7){
+            if (hashtag == "#") {
+                throw new IllegalArgumentException("The hex Code must start with a hashtag #");
+            }
+
+        }
 
 //        String re = new String(red);
 //        System.out.println(re);
